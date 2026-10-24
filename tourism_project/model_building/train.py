@@ -50,7 +50,7 @@ categorical_features = [
     "Occupation",
     "Gender",
     "ProductPitched",
-    "MaritalStatus","Designation" 
+    "MaritalStatus","Designation"
 ]
 
 # Preprocessing
