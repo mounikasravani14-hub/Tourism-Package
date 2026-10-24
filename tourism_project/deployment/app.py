@@ -1,4 +1,5 @@
-import os
+# Load the trained model
+from pathlib import Path
 import streamlit as st
 import pandas as pd
 import joblib
@@ -11,8 +12,7 @@ st.set_page_config(
 )
 
 
-# Load the trained model
-from pathlib import Path
+
 
 APP_DIR = Path(__file__).resolve().parent
 model_path = APP_DIR / "best_model.joblib"
