@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 
-RAW_PATH = Path("/content/sample_data/tourism.csv")
+RAW_PATH = Path("tourism_project/data/tourism.csv")
 
 # Check whether the dataset exists
 if not RAW_PATH.exists():
