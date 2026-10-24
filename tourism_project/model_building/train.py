@@ -22,10 +22,12 @@ mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("Visit_with_Us_Tourism_Prediction")
 
 # Load training and testing data
-Xtrain = pd.read_csv("Xtrain.csv")
-Xtest = pd.read_csv("Xtest.csv")
-ytrain = pd.read_csv("ytrain.csv").squeeze()
-ytest = pd.read_csv("ytest.csv").squeeze()
+data_dir = "tourism_project/data/prepared"
+
+X_train = pd.read_csv(f"{data_dir}/X_train.csv")
+X_test = pd.read_csv(f"{data_dir}/X_test.csv")
+y_train = pd.read_csv(f"{data_dir}/y_train.csv").squeeze()
+y_test = pd.read_csv(f"{data_dir}/y_test.csv").squeeze()
 
 # Define numerical and categorical features
 numerical_features = [
@@ -93,7 +95,7 @@ with mlflow.start_run(run_name="XGBoost_Hyperparameter_Tuning"):
         return_train_score=True
     )
 
-    grid_search.fit(Xtrain, ytrain)
+    grid_search.fit(X_train, y_train)
 
     # Log each hyperparameter combination as a nested run
     results = grid_search.cv_results_
