@@ -133,30 +133,30 @@ with mlflow.start_run(run_name="XGBoost_Hyperparameter_Tuning"):
     print("Best CV F1-score:", grid_search.best_score_)
 
     # Predictions
-    y_pred_train = best_model.predict(Xtrain)
-    y_pred_test = best_model.predict(Xtest)
+    y_pred_train = best_model.predict(X_train)
+    y_pred_test = best_model.predict(X_test)
 
     # Classification metrics
     metrics = {
-        "train_accuracy": accuracy_score(ytrain, y_pred_train),
+        "train_accuracy": accuracy_score(y_train, y_pred_train),
         "train_precision": precision_score(
-            ytrain, y_pred_train, zero_division=0
+            y_train, y_pred_train, zero_division=0
         ),
         "train_recall": recall_score(
-            ytrain, y_pred_train, zero_division=0
+            y_train, y_pred_train, zero_division=0
         ),
         "train_f1": f1_score(
-            ytrain, y_pred_train, zero_division=0
+            y_train, y_pred_train, zero_division=0
         ),
-        "test_accuracy": accuracy_score(ytest, y_pred_test),
+        "test_accuracy": accuracy_score(y_test, y_pred_test),
         "test_precision": precision_score(
-            ytest, y_pred_test, zero_division=0
+            y_test, y_pred_test, zero_division=0
         ),
         "test_recall": recall_score(
-            ytest, y_pred_test, zero_division=0
+            y_test, y_pred_test, zero_division=0
         ),
         "test_f1": f1_score(
-            ytest, y_pred_test, zero_division=0
+            y_test, y_pred_test, zero_division=0
         )
     }
 
@@ -174,7 +174,7 @@ with mlflow.start_run(run_name="XGBoost_Hyperparameter_Tuning"):
     mlflow.sklearn.log_model(
         sk_model=best_model,
         name="xgboost_model",
-        input_example=Xtest.head(5)
+        input_example=X_test.head(5)
     )
 
     print("Model saved successfully:", model_path)
