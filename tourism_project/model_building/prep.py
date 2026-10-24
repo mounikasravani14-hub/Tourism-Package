@@ -4,8 +4,11 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 # File paths
-RAW_PATH = Path("/content/tourism_project/data/tourism.csv")
-OUTPUT_DIR = Path("tourism_project/data/prepared")
+# Locate the tourism_project directory automatically
+BASE_DIR = Path(__file__).resolve().parents[1]
+
+RAW_PATH = BASE_DIR / "data" / "tourism.csv"
+OUTPUT_DIR = BASE_DIR / "data" / "prepared"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load dataset
@@ -73,13 +76,10 @@ for col in categorical_cols:
     X_test[col] = X_test[col].fillna(fill_value)
 
 # Save train-test split files
-output_dir = "tourism_project/data/prepared"
-os.makedirs(output_dir, exist_ok=True)
-
-X_train.to_csv(f"{output_dir}/X_train.csv", index=False)
-X_test.to_csv(f"{output_dir}/X_test.csv", index=False)
-y_train.to_csv(f"{output_dir}/y_train.csv", index=False)
-y_test.to_csv(f"{output_dir}/y_test.csv", index=False)
+X_train.to_csv(OUTPUT_DIR / "X_train.csv", index=False)
+X_test.to_csv(OUTPUT_DIR / "X_test.csv", index=False)
+y_train.to_csv(OUTPUT_DIR / "y_train.csv", index=False)
+y_test.to_csv(OUTPUT_DIR / "y_test.csv", index=False)
 
 print("Training and testing datasets saved successfully.")
 
