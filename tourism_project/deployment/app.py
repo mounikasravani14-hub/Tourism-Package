@@ -10,17 +10,21 @@ st.set_page_config(
     layout="centered"
 )
 
-#load the model committed by the pipeline
-model_path = os.path.join(
-    os.path.dirname(__file__),
-    "best_model.joblib"
+# Diagnostic: locate the trained model
+from pathlib import Path
+
+APP_DIR = Path(__file__).resolve().parent
+model_path = APP_DIR / "best_model.joblib"
+
+st.write("App directory:", str(APP_DIR))
+st.write("Model file exists:", model_path.is_file())
+st.write(
+    "Files in app directory:",
+    [p.name for p in APP_DIR.iterdir()]
 )
 
-if not os.path.exists(model_path):
-    st.error(
-        "Model file not found. Please run the training pipeline "
-        "to generate best_model.joblib."
-    )
+if not model_path.is_file():
+    st.error("best_model.joblib is missing from the deployed app directory.")
     st.stop()
 
 model = joblib.load(model_path)
