@@ -11,6 +11,18 @@ st.set_page_config(
 )
 
 
+# Load the trained model
+from pathlib import Path
+
+APP_DIR = Path(__file__).resolve().parent
+model_path = APP_DIR / "best_model.joblib"
+
+if not model_path.is_file():
+    st.error("Model file not found. Please check the deployment.")
+    st.stop()
+
+model = joblib.load(model_path)
+
 # Application title
 st.title("✈️ Visit with Us")
 st.subheader("Tourism Package Purchase Prediction")
