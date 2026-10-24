@@ -4,7 +4,7 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 # File paths
-RAW_PATH = Path("/content/sample_data/tourism.csv")
+RAW_PATH = Path("tourism_project/data/tourism.csv")
 OUTPUT_DIR = Path("tourism_project/data/prepared")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
