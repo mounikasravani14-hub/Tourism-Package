@@ -1,5 +1,4 @@
-# Load the trained model
-from pathlib import Path
+import os
 import streamlit as st
 import pandas as pd
 import joblib
@@ -11,14 +10,17 @@ st.set_page_config(
     layout="centered"
 )
 
+#load the model committed by the pipeline
+model_path = os.path.join(
+    os.path.dirname(__file__),
+    "best_model.joblib"
+)
 
-
-
-APP_DIR = Path(__file__).resolve().parent
-model_path = APP_DIR / "best_model.joblib"
-
-if not model_path.is_file():
-    st.error("Model file not found. Please check the deployment.")
+if not os.path.exists(model_path):
+    st.error(
+        "Model file not found. Please run the training pipeline "
+        "to generate best_model.joblib."
+    )
     st.stop()
 
 model = joblib.load(model_path)
