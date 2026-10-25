@@ -57,7 +57,7 @@ jobs:
       - name: Prepare data
         run: python tourism_project/model_building/prep.py
 
-      
+
       - name: Upload train/test splits
         uses: actions/upload-artifact@v4
         with:
@@ -83,7 +83,7 @@ jobs:
           pip install -r tourism_project/deployment/requirements.txt
           pip install mlflow==3.0.1
 
-      
+
       - name: Download train/test splits
         uses: actions/download-artifact@v4
         with:
@@ -99,7 +99,7 @@ jobs:
       - name: Train model with MLflow tracking
         run: python tourism_project/model_building/train.py
 
-      
+
       - name: Commit trained model
         run: |
           git config user.name "github-actions[bot]"
